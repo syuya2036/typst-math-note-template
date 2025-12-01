@@ -1,0 +1,5 @@
+# PDFファイルはGit管理しない
+*.pdf
+!main.pdf
+
+.DS_Store
