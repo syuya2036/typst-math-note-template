@@ -53,6 +53,8 @@ GitHub 右上の **"Use this template"** ボタンをクリックし、新しい
 - `#corollary` (系)
 - `#definition` (定義)
 - `#proof` (証明)
+- `#exercise` (練習問題)
+- `#answer` (解答)
 
 #### 数式の書き方
 
