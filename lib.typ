@@ -136,3 +136,60 @@
     _Proof._ #h(0.5em) #body #h(1fr) $square$
   ]
 }
+
+// 練習問題 (採番あり・デザイン変更版)
+#let exercise(title: none, lab: none, body) = {
+  // 1. カウンターを進める (数式・定理と共通)
+  counter(math.equation).step()
+
+  context {
+    // 2. 番号生成ロジック
+    let num = counter(math.equation).get().at(0)
+    let h = counter(heading).get()
+    let c = if h.len() > 0 { h.at(0) } else { 0 }
+    let s = if h.len() > 1 { h.at(1) } else { 0 }
+    let num-str = str(c) + "." + str(s) + "." + str(num)
+
+    // ヘッダー作成
+    let head-text = [*Exercise #num-str*]
+    if title != none {
+      head-text = [*Exercise #num-str* (#title)]
+    }
+
+    // 3. デザイン定義 (ここだけenv-boxと異なる)
+    let content-box = block(
+      fill: luma(250),              // 薄いグレー背景
+      stroke: (left: 2pt + black),  // 左に黒い太線
+      inset: (x: 1em, y: 0.8em),
+      width: 100%,
+      below: 1.5em,
+      radius: 0pt,                  // 角丸なし
+    )[
+      #head-text \
+      #body
+    ]
+
+    // 4. 参照用ラップ処理
+    if lab != none {
+      let fig = figure(
+        kind: "theorem-env",   // 定理と同じkindにしておくか、"exercise-env"にするかはお好みで(今回は定理と混ぜるため共通化)
+        supplement: "Exercise",
+        numbering: _ => num-str,
+        outlined: false,
+        align(start, content-box)
+      )
+      [#fig #lab]
+    } else {
+      content-box
+    }
+  }
+}
+
+// 解答用の簡易スタイル (変更なし)
+#let answer(body) = {
+  block(
+    below: 1.5em,
+    text(fill: luma(10%), size: 0.9em)[
+    _Answer._ #h(0.5em) #body #h(1fr) $square$
+  ])
+}
