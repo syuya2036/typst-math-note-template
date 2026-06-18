@@ -20,7 +20,7 @@ jobs:
       - name: Install Japanese fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-noto-cjk fonts-harano-aji
+          sudo apt-get install -y fonts-noto-cjk fonts-harano-aji-mincho fonts-harano-aji-gothic
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
